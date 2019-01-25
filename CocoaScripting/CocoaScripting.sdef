@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="CocoaScripting Dictionary">
+	<suite name="Standard Suite" code="????" description="Common classes and commands for most applications.">
+		<cocoa name="NSCoreSuite"/>
+		<command name="count" code="corecnte" description="Return the number of elements of a particular class within an object.">
+			<cocoa class="NSCountCommand"/>
+			<direct-parameter description="the object whose elements are to be counted" type="specifier"/>
+			<parameter name="each" code="kocl" description="The class of objects to be counted." type="type" optional="yes">
+				<cocoa key="ObjectClass"/>
+			</parameter>
+			<result description="the number of elements" type="integer"/>
+		</command>
+		<command name="delete" code="coredelo" description="Delete an object.">
+			<cocoa class="NSDeleteCommand"/>
+			<direct-parameter description="the object to delete" type="specifier"/>
+		</command>
+		<command name="exists" code="coredoex" description="Verify if an object exists.">
+			<cocoa class="NSExistsCommand"/>
+			<direct-parameter description="the object in question" type="specifier"/>
+			<result description="true if it exists, false if not" type="boolean"/>
+		</command>
+		<command name="make" code="corecrel" description="Make a new object.">
+			<cocoa name="Create" class="NSCreateCommand"/>
+			<parameter name="new" code="kocl" description="The class of the new object." type="type">
+				<cocoa key="ObjectClass"/>
+			</parameter>
+			<parameter name="at" code="insh" description="The location at which to insert the object." type="location specifier" optional="yes">
+				<cocoa key="Location"/>
+			</parameter>
+			<parameter name="with data" code="data" description="The initial data for the object." type="any" optional="yes">
+				<cocoa key="ObjectData"/>
+			</parameter>
+			<parameter name="with properties" code="prdt" description="The initial values for properties of the object." type="record" optional="yes">
+				<cocoa key="KeyDictionary"/>
+			</parameter>
+			<result description="to the new object" type="specifier"/>
+		</command>
+	</suite>
+	<suite name="CocoaScripting Suite" code="coSC" description="The CocoaScripting Suite">
+		<enumeration name="genders" code="geND" description="A gender" inline="2">
+			<enumerator name="male" code="gMAL" description="Male gender."/>
+			<enumerator name="female" code="gFEM" description="Female gender."/>
+		</enumeration>
+		<class name="application" code="capp" description="An application&apos;s top level scripting object.">
+			<cocoa class="NSApplication"/>
+			<element description="The persons. You can make a new person and you can pair two unpaired persons." type="person">
+				<cocoa key="personsArray"/>
+			</element>
+			<property name="name" code="pnam" description="The name of the application." type="text" access="r"/>
+			<property name="frontmost" code="pisf" description="Is this the frontmost (active) application?" type="boolean" access="r">
+				<cocoa key="isActive"/>
+			</property>
+			<property name="version" code="vers" description="The version of the application." type="text" access="r"/>
+		</class>
+		<class name="person" code="pRSn" description="A person" plural="persons">
+			<cocoa class="Person"/>
+			<property name="name" code="pnam" description="The person&apos;s name. You must supply a name on creation; you can change a person&apos;s name later but names must be unique." type="text">
+				<cocoa key="personName"/>
+			</property>
+			<property name="gender" code="gNDr" description="The person&apos;s gender. You must supply a gender on creation and you can&apos;t change it later." type="genders">
+				<cocoa key="personGender"/>
+			</property>
+			<property name="partner" code="pTNr" description="Person with whom this person is paired, or &quot;missing value&quot; if none." type="person">
+				<cocoa key="personPartner"/>
+			</property>
+			<property name="paired" code="pARd" description="Does this person have a partner?" type="boolean" access="r">
+				<cocoa key="personPaired"/>
+			</property>
+			<property name="age" code="pAGe" description="The person&apos;s age." type="number">
+				<cocoa key="personAge"/>
+			</property>
+			<property name="id" code="ID  " description="The unique identifier of the person." type="integer" access="r">
+				<cocoa key="personCardID"/>
+			</property>
+			<responds-to command="pair">
+				<cocoa method="scripterSaysPair:"/>
+			</responds-to>
+		</class>
+		<command name="pair" code="coSCpAiR">
+			<direct-parameter description="One person." type="person"/>
+			<parameter name="to" code="othR" description="The other person." type="person">
+				<cocoa key="otherPerson"/>
+			</parameter>
+		</command>
+	</suite>
+</dictionary>
